@@ -62,3 +62,7 @@ button.google-signin {
     background-color: #634d96;
     margin-top: 10px;
 }
+
+footer{
+    display: none;
+}
