@@ -1,0 +1,296 @@
+body {
+    margin: 0;
+}
+
+.page-content {
+    width: 100%;
+    margin: 0 auto;
+    background-image: -moz-linear-gradient(136deg, #2c3e50 0%, #4ca1af 100%);
+    background-image: -webkit-linear-gradient(136deg, #2c3e50 0%, #4ca1af 100%);
+    background-image: -ms-linear-gradient(136deg, #2c3e50 0%, #4ca1af 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-v2-content {
+    background: #ffffff;
+    width: 851px;
+    border-radius: 15px;
+    margin: 100px 0;
+    position: relative;
+    display: flex;
+}
+
+.form-v2-content .form-left {
+    margin-bottom: -4px;
+    position: relative;
+}
+
+.form-v2-content .form-left img {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.form-v2-content .form-left .text-1,
+.form-v2-content .form-left .text-2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.form-v2-content .form-left .text-1 {
+    position: absolute;
+    left: 9%;
+    bottom: 15%;
+}
+
+.form-v2-content .form-left .text-2 {
+    position: absolute;
+    right: 8%;
+    bottom: 1.5%;
+}
+
+.form-v2-content .form-left .text-1 p {
+    font-size: 32px;
+    line-height: 1.67;
+}
+
+.form-v2-content .form-left .text-1 span {
+    font-size: 25px;
+    display: block;
+}
+
+.form-v2-content .form-left .text-2 p {
+    font-size: 18px;
+}
+
+.form-v2-content .form-left .text-2 span {
+    font-size: 35px;
+    padding-right: 9px;
+}
+
+.form-v2-content .form-detail {
+    padding: 20px 40px 20px 40px;
+    position: relative;
+    width: 100%;
+}
+
+.form-v2-content .form-detail h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #ffffff; /* Light text color */
+    font-size: 28px;
+    position: relative;
+    padding: 6px 0 0;
+    margin-bottom: 25px;
+}
+
+.form-v2-content .form-row {
+    width: 100%;
+    position: relative;
+}
+
+.form-v2-content .form-detail label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #f1f1f1; /* Light label color */
+    display: block;
+    margin-bottom: 11px;
+}
+
+.form-v2-content .form-detail .form-row label#valid {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #53c83c;
+}
+
+.form-v2-content .form-detail .form-row label#valid::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 3px;
+    height: 8px;
+    border: 1px solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.form-v2-content .form-detail .form-row label.error {
+    padding-left: 0;
+    margin-left: 0;
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    background: none;
+    color: red;
+}
+
+.form-v2-content .form-detail .input-text {
+    margin-bottom: 27px;
+}
+
+.form-v2-content .form-detail input {
+    width: 91%;
+    padding: 14.5px 15px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    appearance: unset;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-v2-content .form-detail .form-row input:focus {
+    border: 1px solid #53c83c;
+}
+
+.form-v2-content .form-detail input[type="radio"] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.form-v2-content .form-detail .form-checkbox {
+    width: 80%;
+    margin-top: -17px;
+    position: relative;
+}
+
+.form-v2-content .form-detail .form-checkbox input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-v2-content .form-detail .form-checkbox .checkmark {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.form-v2-content .form-detail .form-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 3px;
+    height: 8px;
+    border: 1px solid #385cb9;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.form-v2-content .form-detail .form-checkbox input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.form-v2-content .form-detail .form-checkbox p {
+    margin-left: 35px;
+    color: #f1f1f1; /* Light text color */
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.67;
+}
+
+.form-v2-content .form-detail .form-checkbox a {
+    font-weight: 500;
+    color: #3498db; /* Link color */
+    text-decoration: underline;
+}
+
+.form-v2-content .form-detail .register {
+    background: #3498db; /* Button color */
+    border-radius: 6px;
+    width: 160px;
+    border: none;
+    margin: 6px 0 50px 0px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.form-v2-content .form-detail .register:hover {
+    background: #2980b9; /* Darker on hover */
+}
+
+.form-v2-content .form-detail .form-row-last input {
+    padding: 15.5px;
+}
+
+input::-webkit-input-placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+input::-moz-placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+input:-ms-input-placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+input:-moz-placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media screen and (max-width: 991px) {
+    .form-v2-content {
+        margin: 180px 20px;
+        flex-direction: column;
+    }
+
+    .form-v2-content .form-left {
+        width: 100%;
+    }
+
+    .form-v2-content .form-left img {
+        width: 100%;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 15px;
+    }
+
+    .form-v2-content .form-detail {
+        padding: 30px 20px 30px 20px;
+        width: auto;
+    }
+
+    .form-v2-content .form-detail .form-row input {
+        width: 95%;
+    }
+
+    .form-v2-content .form-detail .form-checkbox {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .form-v2-content .form-detail .form-row input {
+        width: 89.5%;
+    }
+}

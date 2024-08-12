@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlutoBot Sign-In</title>
+    <link rel="stylesheet" href="css/roboto-font.css">
+    <link rel="stylesheet" href="fonts/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="css/signin.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <h1>Sign In</h1>
+        <p>Your financial literacy companion.</p>
+        <form id="signin-form">
+            <input type="text" placeholder="Enter your email" required>
+            <input type="password" placeholder="Enter your password" required>
+            <button type="submit">Sign In</button>
+            <button type="button" class="google-signin" onclick="handleGoogleSignIn()">
+                Sign in with Google
+            </button>
+        </form>
+    </div>
+
+    <script>
+        particlesJS.load('particles-js', '/particles.json', function() {
+          console.log('particles.js loaded - callback');
+        });
+        
+        async function handleGoogleSignIn() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const auth = firebase.auth();
+
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+                console.log('User signed in: ', user);
+
+                window.location.href = "/dashboard";
+            } catch (error) {
+                console.error('Error during sign in: ', error.code, error.message);
+            }
+        }
+    </script>
+</body>
+</html>

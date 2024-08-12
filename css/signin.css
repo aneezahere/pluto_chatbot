@@ -1,0 +1,78 @@
+/* signin.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    background: linear-gradient(145deg, #121212, #1e1e1e); /* Dark background gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-in-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background: #212121; /* Dark container background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+p {
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    background: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #8e24aa; /* Purple border */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(142, 36, 170, 0.6); /* Purple shadow */
+    transition: all 0.3s ease;
+}
+
+button[type="submit"] {
+    background: linear-gradient(145deg, #6a1b9a, #8e24aa); /* Purple gradient for sign-in button */
+    color: #fff;
+}
+
+button.google-signin {
+    background: linear-gradient(145deg, #6a1b9a, #8e24aa); /* Purple gradient for Google sign-in button */
+    color: #fff;
+}
+
+/* Add hover effect to enhance button interaction */
+button:hover {
+    box-shadow: 0 6px 12px rgba(142, 36, 170, 0.8); /* Darker purple shadow on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}

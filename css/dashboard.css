@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    animation: backgroundFade 5s infinite;
+}
+
+@keyframes backgroundFade {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation ease 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
