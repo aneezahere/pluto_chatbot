@@ -1,169 +1,103 @@
-import { useState, useEffect } from "react";
-import Script from 'next/script';
+import React, { useState } from "react";
+import Spline from '@splinetool/react-spline';
 
-export default function Dashboard() {
-  const [prompt, setPrompt] = useState("");
+const Dashboard = () => {
   const [conversation, setConversation] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [lottieLoaded, setLottieLoaded] = useState(false);
+  const [userInput, setUserInput] = useState("");
 
-  useEffect(() => {
-    const handleEnterPress = (event) => {
-      if (event.key === "Enter") {
-        handleChatSubmit();
-      }
-    };
+  const handleSendMessage = async () => {
+    if (userInput.trim() === "") return;
 
-    window.addEventListener("keydown", handleEnterPress);
-    return () => {
-      window.removeEventListener("keydown", handleEnterPress);
-    };
-  }, [prompt]);
+    const userMessage = { sender: "user", text: userInput };
+    setConversation([...conversation, userMessage]);
 
-  const handleChatSubmit = async () => {
-    if (!prompt.trim()) return;
+    // Send message to server-side API and receive a response
+    const aiResponse = await fetchAIResponse(userInput);
 
-    const userMessage = { sender: "user", text: prompt };
-    setConversation((prev) => [...prev, userMessage]);
-    setPrompt("");
-    setIsTyping(true);
+    const aiMessage = { sender: "ai", text: aiResponse };
+    setConversation([...conversation, userMessage, aiMessage]);
+    setUserInput("");
+  };
 
+  const fetchAIResponse = async (message) => {
     try {
-      const res = await fetch('/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ message })
       });
-
-      const data = await res.json();
-      setIsTyping(false);
-      const aiMessage = { sender: "ai", text: data.text };
-      setConversation((prev) => [...prev, aiMessage]);
+      const data = await response.json();
+      if (response.ok) {
+        return data.response;
+      } else {
+        console.error("Error fetching AI response:", data.error);
+        return "Sorry, something went wrong.";
+      }
     } catch (error) {
-      console.error("Error fetching generated text:", error);
-      setIsTyping(false);
-      setConversation((prev) => [...prev, { sender: "ai", text: "Something went wrong. Please try again." }]);
+      console.error("Error fetching AI response:", error);
+      return "Sorry, something went wrong.";
     }
   };
 
   return (
-    <div
-      className="dashboard-container"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '100vh',
-        background: 'linear-gradient(to right, #232526, #414345)',
-        padding: '20px',
-        boxSizing: 'border-box',
-      }}
-    >
-      {/* Lottie Animation on the Left Side */}
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        {lottieLoaded && (
-          <dotlottie-player
-            src="https://lottie.host/45ee9b08-15c2-494a-b217-2dd787cd2cfc/NM0g4rGM5b.json"
-            background="transparent"
-            speed="1"
-            style={{ width: "400px", height: "400px" }}
-            loop
-            autoplay
-          />
-        )}
+    <div className="relative h-screen w-screen">
+      {/* Spline Model as Background */}
+      <div className="absolute inset-0 z-0">
+        <Spline
+          scene="https://prod.spline.design/JlYVvMnH3zgdMA4y/scene.splinecode"
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
 
-      {/* Chat Interface on the Right Side */}
-      <div style={{ flex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-        <div
-          style={{
-            flexGrow: 1,
-            overflowY: 'auto',
-            padding: '15px',
-            color: '#fff',
-            width: '100%',
-            boxSizing: 'border-box',
-          }}
-        >
-          {conversation.map((msg, index) => (
+      {/* Chat Interface Overlay */}
+      <div className="relative z-10 h-full w-full flex flex-col justify-end">
+        <div style={{ flex: 1, overflowY: "auto", padding: "20px" }}>
+          {Array.isArray(conversation) && conversation.map((msg, index) => (
             <div
               key={index}
               style={{
-                display: 'flex',
-                justifyContent: msg.sender === "user" ? 'flex-end' : 'flex-start',
-                marginBottom: '10px',
+                display: "flex",
+                justifyContent: msg.sender === "user" ? "flex-end" : "flex-start",
+                marginBottom: "10px",
               }}
             >
-              <div
+              <div className="glassy-bg"
                 style={{
-                  backgroundColor: msg.sender === "user" ? '#007BFF' : '#444',
-                  color: '#fff',
-                  borderRadius: '15px',
-                  padding: '15px 20px',
-                  maxWidth: '70%',  // Reduce the maxWidth to prevent overflow
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontFamily: 'Arial, sans-serif',
-                  fontSize: '16px',
-                  overflowWrap: 'break-word', // Ensure long words are wrapped
+                 
+                  color: "#000",
+                  borderRadius: "15px",
+                  padding: "15px 20px",
+                  maxWidth: "75%",
+                  width: "fit-content",
+                  wordWrap: "break-word",
+                  whiteSpace: "pre-wrap",
+                  fontSize: "16px",
                 }}
               >
                 {msg.text}
               </div>
             </div>
           ))}
-          {isTyping && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                marginBottom: '10px',
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: '#444',
-                  color: '#fff',
-                  borderRadius: '15px',
-                  padding: '15px 20px',
-                  maxWidth: '70%',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontFamily: 'Arial, sans-serif',
-                  fontSize: '16px',
-                  overflowWrap: 'break-word',
-                }}
-              >
-                Pluto is typing...
-              </div>
-            </div>
-          )}
         </div>
-        <input
-          type="text"
-          placeholder="Ask Pluto something..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          style={{
-            padding: '20px',
-            borderRadius: '10px',
-            border: '1px solid #ccc',
-            width: '100%',
-            fontSize: '16px',
-            marginTop: '10px',
-          }}
-        />
-      </div>
+        <div className="w-full glassy-bg" style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+          <input className=" w-full text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5  me-2 mb-2"
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Type prompt..."
+          />
+          <button className="w-fit text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
 
-      {/* Lottie Player script */}
-      <Script
-        src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
-        type="module"
-        strategy="afterInteractive"
-        onLoad={() => setLottieLoaded(true)}
-      />
+            onClick={handleSendMessage}
+          >
+            Send
+          </button>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Dashboard;

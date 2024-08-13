@@ -1,30 +1,39 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
+
+// Initialize the Groq client
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.status(405).json({ message: "Only POST requests are allowed" });
-    return;
-  }
+  if (req.method === 'POST') {
+    const { message } = req.body;
 
-  try {
-    // Access your API key as an environment variable
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    if (!message || typeof message !== 'string') {
+      return res.status(400).json({ error: 'Invalid request. Message is required.' });
+    }
 
-    // Initialize the model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    try {
+      console.log('Received message:', message);
+      // Use Groq's chat completion method
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+        model: "llama3-8b-8192", // Adjust the model based on your requirements
+      });
 
-    // Get the prompt from the request body
-    const { prompt } = req.body;
+      console.log('AI Response:', chatCompletion);
 
-    // Generate content
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = await response.text();
-
-    // Send the generated text as the response
-    res.status(200).json({ text });
-  } catch (error) {
-    console.error("Error generating content:", error.message || error);
-    res.status(500).json({ error: "Something went wrong" });
+      // Extract the response from the Groq API response structure
+      const text = chatCompletion.choices[0]?.message?.content || '';
+      return res.status(200).json({ response: text });
+    } catch (error) {
+      console.error("Error generating content from AI:", error);
+      return res.status(500).json({ error: 'Failed to generate content from AI.' });
+    }
+  } else {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 }

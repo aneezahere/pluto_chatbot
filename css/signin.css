@@ -1,80 +1,35 @@
-/* signin.css */
-
-body, html {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-    height: 100%;
-    background: linear-gradient(145deg, #121212, #1e1e1e); /* Dark background gradient */
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.sign-in-page {
-    display: flex;
     align-items: center;
-    justify-content: center;
     height: 100vh;
 }
 
-.container {
-    background: #212121; /* Dark container background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    text-align: center;
+.sign-in-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h1 {
+.neon-button {
+    width: 200px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 18px;
     color: #fff;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-p {
-    color: #bbb;
-    margin-bottom: 20px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    background-color: #111;
     border: none;
-    background: #333;
-    color: #fff;
-    font-size: 16px;
-}
-footer{
-    display: none;
-}
-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
     border-radius: 5px;
-    border: 2px solid #8e24aa; /* Purple border */
     cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(142, 36, 170, 0.6); /* Purple shadow */
-    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-button[type="submit"] {
-    background: linear-gradient(145deg, #6a1b9a, #8e24aa); /* Purple gradient for sign-in button */
-    color: #fff;
-}
-
-button.google-signin {
-    background: linear-gradient(145deg, #6a1b9a, #8e24aa); /* Purple gradient for Google sign-in button */
-    color: #fff;
-}
-
-/* Add hover effect to enhance button interaction */
-button:hover {
-    box-shadow: 0 6px 12px rgba(142, 36, 170, 0.8); /* Darker purple shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+.neon-button:hover {
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 50px #00ff00;
 }

@@ -1,68 +1,114 @@
 body {
     margin: 0;
-    background: linear-gradient(135deg, #2e2b5f 0%, #4b4871 50%, #605d83 100%);
+    padding: 0;
     height: 100vh;
+    background: #ECECEC; /* Overall background color - light grey */
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #ECECEC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
 }
 
-.page-content {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sign-in-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.form-v2-content {
-    background: #fff;
-    width: 400px;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+.container {
+  background: #D4DFD1;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
 }
 
 h1 {
-    text-align: center;
-    color: #4a3c7b;
-    font-size: 24px;
-    margin-bottom: 20px;
+  color: #272c56;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 p {
-    text-align: center;
-    color: #7a6a92;
-    margin-bottom: 30px;
+  color: #6D6D6D;
+  margin-bottom: 30px;
+  font-size: 16px;
 }
 
-input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.input-style {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #C1DAC7;
+  background: #FFF;
+  color: #333;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-    color: #fff;
-    cursor: pointer;
+  width: 100%;
+  padding: 120px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 button[type="submit"] {
-    background-color: #4a3c7b;
+  background-color: #C1DAC7;
+  box-shadow: 0 0 15px rgba(97, 153, 128, 0.6);
 }
 
 button.google-signin {
-    background-color: #634d96;
-    margin-top: 10px;
+  background-color: #97BFB6;
+  margin-top: 10px;
+  box-shadow: 0 0 15px rgba(97, 153, 128, 0.6);
 }
 
-footer{
-    display: none;
+button:hover {
+  box-shadow: 0 0 20px rgba(97, 153, 128, 0.8);
+  transform: translateY(-2px);
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .input-style, button {
+    font-size: 14px;
+  }
+}
+
