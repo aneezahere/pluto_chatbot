@@ -1,21 +1,97 @@
+/* Body with full screen coverage */
 body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    animation: backgroundFade 5s infinite;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #232526, #414345); /* Ensure gradient covers entire viewport */
+    font-family: 'Poppins', sans-serif;
 }
 
-@keyframes backgroundFade {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Main chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh; /* Ensures it's slightly off the top/bottom edges */
+    background: rgba(0, 0, 0, 0.5); /* Optional, if you want a semi-transparent background */
+    border-radius: 10px;
+    overflow: hidden; /* Hide anything outside of the chat container */
 }
 
-.fade-in {
-    opacity: 0;
-    animation: fadeInAnimation ease 3s;
-    animation-fill-mode: forwards;
+/* Chat messages area */
+.chat-messages {
+    flex: 1; /* Fills the space above the input area */
+    padding: 20px;
+    overflow-y: auto; /* Allows scrolling when messages overflow */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-@keyframes fadeInAnimation {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+/* Individual chat message styling */
+.chat-message {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.chat-message.user {
+    justify-content: flex-end;
+}
+
+.chat-message.ai {
+    justify-content: flex-start;
+}
+
+/* Message content styling */
+.chat-message-content {
+    max-width: 80%;
+    padding: 12px 20px;
+    border-radius: 15px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+}
+
+.chat-message.user .chat-message-content {
+    background-color: #007BFF;
+}
+
+.chat-message.ai .chat-message-content {
+    background-color: #444;
+}
+
+/* Input container with fixed height at the bottom */
+.input-container {
+    padding: 20px;
+    background: #232526;
+    border-top: 1px solid #ccc;
+}
+
+/* Input box styling */
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: #007BFF;
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: 100%;
+        height: 100vh; /* Occupies full screen on mobile */
+    }
 }
